@@ -1,0 +1,42 @@
+{
+  "name": "easypay",
+  "version": "1.0.0",
+  "description": "Test task for easypay company",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tormozz48/easypay.git"
+  },
+  "keywords": [
+    "express",
+    "postgress",
+    "phone",
+    "number",
+    "check",
+    "test",
+    "task",
+    "easypay",
+    "oauth2",
+    "nodejs"
+  ],
+  "author": "andrey.kuznetsov48@yandex.ru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tormozz48/easypay/issues"
+  },
+  "homepage": "https://github.com/tormozz48/easypay#readme",
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-config-gemini-testing": "^2.7.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "morgan": "^1.9.0",
+    "serve-static": "^1.13.1"
+  }
+}
