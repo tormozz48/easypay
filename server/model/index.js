@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const config = require('config');
 const Client = require('pg').Client;
 const Sequelize = require('sequelize');
@@ -24,16 +25,11 @@ module.exports = async function() {
     const db = new Sequelize(database, user, password, {
         dialect: 'postgres',
         host,
-        port
+        port,
+        logging: _.noop
     });
 
-    try {
-        await db.authenticate();
-        console.info('Connection has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-        throw error;
-    }
+    await testConnection(db);
 
     debug('initialize application models');
     const Account = createAccountModel(db);
@@ -62,8 +58,21 @@ async function createDatabase({host, port, user, password, database}) {
     }
 }
 
+async function testConnection(db) {
+    try {
+        await db.authenticate();
+        console.info('Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+        throw error;
+    }
+}
+
 async function populateDatabase({Phone}) {
     const stub = config.get('stub');
 
-    await Promise.all(stub.phones.map((number) => Phone.create({number})));
+    await Promise.all(stub.phones.map((number) => {
+        return Phone.create({number}).catch(_.noop);
+    }));
+    // TODO добавить генерацию для данных аккаунта
 }
